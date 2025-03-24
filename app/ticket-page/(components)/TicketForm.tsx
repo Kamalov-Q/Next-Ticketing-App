@@ -3,6 +3,7 @@ import { Category, Status, Ticket } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 const TicketForm = () => {
+  const router = useRouter();
   const initialTicketData = {
     title: "",
     description: "",
@@ -28,9 +29,6 @@ const TicketForm = () => {
           [name]:
             type === "radio" || type === "number" ? parseInt(value) : value,
         };
-
-        console.log("Updated formData:", updatedData); // Logs the correct state
-
         return updatedData;
       });
     } catch (error) {
@@ -40,8 +38,7 @@ const TicketForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
-
-    const response = await fetch(`api/tickets`, {
+    const response = await fetch(`/ticket-page/api/tickets`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,13 +60,15 @@ const TicketForm = () => {
       priority: 1,
       progress: 0,
       active: true,
-    })
+    });
+    router.refresh();
+    router.push(`/`);
   };
 
   return (
     <div className="flex justify-center">
       <form
-        className="flex flex-col gap-3 w-1/2"
+        className="flex flex-col gap-3 w-full md:w-1/2"
         method="post"
         onSubmit={handleSubmit}
       >
