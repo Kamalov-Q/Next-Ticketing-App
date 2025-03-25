@@ -34,10 +34,11 @@ import { NextResponse } from "next/server";
 
 export const DELETE = async (
   req: Request,
-  context: { params: { id: string } } // ✅ Fix: Correct type for params
+  params: { params: any }
+  // ✅ Fix: Correct type for params
 ) => {
   try {
-    const { id } = context.params; // ✅ Fix: Extract params correctly
+    const id = params; // ✅ Fix: Extract params correctly
 
     const deletedTicket = await Ticket.findByIdAndDelete(id);
     if (!deletedTicket) {
