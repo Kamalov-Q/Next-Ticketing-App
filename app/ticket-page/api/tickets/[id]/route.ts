@@ -3,10 +3,11 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  context: { params: { id: string } }
+//   context: { params: { id: string } }
+{params}
 ) {
   try {
-    const { id } = context.params;;
+    const { id } = params;;
     const deletedTicket = await Ticket.findByIdAndDelete(id);
     if (!deletedTicket) {
       return NextResponse.json(
