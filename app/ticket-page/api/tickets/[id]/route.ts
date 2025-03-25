@@ -32,10 +32,10 @@
 import Ticket from "@/app/ticket-page/(models)/Ticket";
 import { NextResponse } from "next/server";
 
-export async function DELETE(
+export const DELETE = async (
   req: Request,
   context: { params: { id: string } } // ✅ Fix: Correct type for params
-) {
+) => {
   try {
     const { id } = context.params; // ✅ Fix: Extract params correctly
 
@@ -58,4 +58,4 @@ export async function DELETE(
       { status: 500 }
     );
   }
-}
+};
