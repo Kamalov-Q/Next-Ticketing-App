@@ -2,11 +2,11 @@ import Ticket from "@/app/ticket-page/(models)/Ticket";
 import { NextResponse } from "next/server";
 
 export async function DELETE(
-  _: Request,
-  { params }: { params: { id: string } }
+  req: Request,
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = await params;
+    const { id } = context.params;;
     const deletedTicket = await Ticket.findByIdAndDelete(id);
     if (!deletedTicket) {
       return NextResponse.json(
