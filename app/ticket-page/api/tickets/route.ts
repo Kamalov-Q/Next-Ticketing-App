@@ -52,7 +52,12 @@ export async function GET() {
   try {
     const tickets = await Ticket.find();
     return NextResponse.json(
-      { tickets, message: "All Tickets", success: true },
+      {
+        tickets,
+        message: "All Tickets",
+        count: tickets?.length,
+        success: true,
+      },
       { status: 200 }
     );
   } catch (error: any) {

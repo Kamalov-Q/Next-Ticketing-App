@@ -33,7 +33,7 @@ const TicketCard = ({ id, ticket }: TicketCardProps) => {
       <div className="flex mb-3">
         <PriorityDisplay priority={ticket?.priority} />
         <div className="ml-auto">
-          <DeleteBlock />
+          <DeleteBlock id={ticket?._id} />
         </div>
       </div>
       <h4>{ticket?.title}</h4>
@@ -43,15 +43,6 @@ const TicketCard = ({ id, ticket }: TicketCardProps) => {
       <div className="flex mt-2">
         <div className="flex flex-col">
           <p className="text-xs my-1">
-            {/* <span>
-              {ticket?.createdAt?.slice(0, ticket?.createdAt?.indexOf("T"))}
-            </span>
-            <span className="ml-2">
-              {ticket?.createdAt?.slice(
-                ticket?.createdAt?.indexOf("T") + 1,
-                16
-              )}
-            </span> */}
             {ticket?.createdAt ? formatTimeStamp(ticket.createdAt) : "N/A"}
           </p>
           <ProgressDisplay progress={ticket?.progress} />

@@ -1,5 +1,5 @@
 export interface Ticket {
-  id?: string;
+  _id?: string;
   title: string;
   description: string;
   category: Category;
