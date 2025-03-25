@@ -39,8 +39,9 @@ export const DELETE = async (
 ) => {
   try {
     const id = params; // ✅ Fix: Extract params correctly
+    console.log("ID", id.params.id);
 
-    const deletedTicket = await Ticket.findByIdAndDelete(id);
+    const deletedTicket = await Ticket.findByIdAndDelete({ _id: id.params.id });
     if (!deletedTicket) {
       return NextResponse.json(
         { message: "Ticket not found" },
