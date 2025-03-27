@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Ticket from "../../(models)/Ticket";
 
 export async function POST(req: Request) {
@@ -73,3 +73,64 @@ export async function GET() {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const searchParams = req.nextUrl.searchParams;
+    const id = searchParams.get("id");
+
+    const deletedTicket = await Ticket.findByIdAndDelete(id);
+
+    if (!deletedTicket) {
+      return NextResponse.json(
+        { message: "Ticket not found", success: false },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        message: "Ticket deleted successfully",
+        success: true,
+        data: deletedTicket,
+      },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error(error);
+    return NextResponse.json(
+      { message: "Internal Server Error", success: false, data: null },
+      { status: 500 }
+    );
+  }
+}
+
+// export async function GET(req: NextRequest) {
+//   try {
+//     const searchParams = req.nextUrl.searchParams;
+//     const id = searchParams;
+
+//     const foundTicket = await Ticket.findOne({ _id: id });
+
+//     if (!foundTicket) {
+//       return NextResponse.json(
+//         { message: "Ticket not found", success: false },
+//         { status: 404 }
+//       );
+//     }
+
+//     return NextResponse.json({ foundTicket });
+//   } catch (error: any) {
+//     console.error(error);
+//     return NextResponse.json(
+//       {
+//         message: "Internal Server Error",
+//         data: null,
+//         success: false,
+//       },
+//       { status: 500 }
+//     );
+//   }
+// }
+
+

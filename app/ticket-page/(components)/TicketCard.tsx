@@ -3,6 +3,7 @@ import DeleteBlock from "./DeleteBlock";
 import PriorityDisplay from "./PriorityDisplay";
 import ProgressDisplay from "./ProgressDisplay";
 import StatusDisplay from "./StatusDisplay";
+import Link from "next/link";
 
 interface TicketCardProps {
   ticket: Ticket;
@@ -36,21 +37,23 @@ const TicketCard = ({ id, ticket }: TicketCardProps) => {
           <DeleteBlock id={ticket?._id} />
         </div>
       </div>
-      <h4>{ticket?.title}</h4>
-      <hr className="h-px border-0 bg-[#2b3441] mb-2" />
-      <p className="whitespace-pre-wrap">{ticket?.description}</p>
-      <div className="flex-grow"></div>
-      <div className="flex mt-2">
-        <div className="flex flex-col">
-          <p className="text-xs my-1">
-            {ticket?.createdAt ? formatTimeStamp(ticket.createdAt) : "N/A"}
-          </p>
-          <ProgressDisplay progress={ticket?.progress} />
+      <Link href={`/ticket-page/${ticket?._id}`} style={{display : "contents"}}>
+        <h4>{ticket?.title}</h4>
+        <hr className="h-px border-0 bg-[#2b3441] mb-2" />
+        <p className="whitespace-pre-wrap">{ticket?.description}</p>
+        <div className="flex-grow"></div>
+        <div className="flex mt-2">
+          <div className="flex flex-col">
+            <p className="text-xs my-1">
+              {ticket?.createdAt ? formatTimeStamp(ticket.createdAt) : "N/A"}
+            </p>
+            <ProgressDisplay progress={ticket?.progress} />
+          </div>
+          <div className="ml-auto flex items-end">
+            <StatusDisplay status={ticket?.status} />
+          </div>
         </div>
-        <div className="ml-auto flex items-end">
-          <StatusDisplay status={ticket?.status} />
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };

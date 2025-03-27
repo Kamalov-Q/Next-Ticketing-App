@@ -2,20 +2,6 @@
 import { useEffect, useState } from "react";
 import TicketCard from "./ticket-page/(components)/TicketCard";
 import { Ticket } from "@/lib/types";
-
-// const getTickets = async (): Promise<{ tickets: Ticket[] }> => {
-//   try {
-//     const res = await fetch(`http://localhost:3000/api/tickets`, {
-//       cache: "no-store",
-//     });
-
-//     return res.json();
-//   } catch (error) {
-//     console.error("Error fetching data : ", error);
-//     return { tickets: [] };
-//   }
-// };
-
 const Home = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState<Boolean>(true);

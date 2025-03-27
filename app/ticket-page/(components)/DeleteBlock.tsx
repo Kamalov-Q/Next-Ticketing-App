@@ -8,13 +8,12 @@ const DeleteBlock = ({ id }: { id: string | undefined }) => {
 
   const deleteTicket = async () => {
     try {
-      const response = await fetch(`/ticket-page/api/tickets/${id}`, {
+      const response = await fetch(`/ticket-page/api/tickets?id=${id}`, {
         method: "DELETE",
       });
-      if (response?.ok) {
+      if (response.ok) {
         router.refresh();
-      } else {
-        throw new Error("Failed to delete ticket");
+        router.push(`/`);
       }
     } catch (error: any) {
       console.error(error);

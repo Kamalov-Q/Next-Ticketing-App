@@ -2,9 +2,15 @@
 import { Category, Status, Ticket } from "@/lib/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-const TicketForm = () => {
+
+interface TicketFormProps {
+  ticket: Ticket | { _id: string };
+}
+
+const TicketForm = (/* { ticket }: TicketFormProps */) => {
+  // const EDIT_MODE = ticket?._id === "new" ? false : true;
   const router = useRouter();
-  const initialTicketData = {
+  let initialTicketData: Ticket | { _id: string } = {
     title: "",
     description: "",
     category: "Hardware Problem" as Category,
@@ -14,7 +20,12 @@ const TicketForm = () => {
     active: true,
   };
 
+  // if (EDIT_MODE) {
+  //   initialTicketData = ticket as Ticket;
+  // }
+
   const [formData, setFormData] = useState<Ticket>(initialTicketData);
+  // console.log(ticket, "Form data from TicketForm");
 
   const handleChange = (
     event: React.ChangeEvent<
