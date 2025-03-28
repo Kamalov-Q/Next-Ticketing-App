@@ -13,6 +13,7 @@ const Home = () => {
           cache: "no-store",
         });
         const data = await res.json();
+
         setTickets(data.tickets);
         setLoading(false);
       } catch (error) {
@@ -24,7 +25,6 @@ const Home = () => {
 
     getTickets();
   }, []);
-
   const uniqueCategories = [
     ...new Set(tickets?.map(({ category }) => category)),
   ];
